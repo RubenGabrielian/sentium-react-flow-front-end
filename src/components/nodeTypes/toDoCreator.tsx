@@ -18,6 +18,9 @@ const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
     const [api, contextHolder] = notification.useNotification();
     const { refetch } = useGetTodos();
     const { data: session } = useSession();
+    
+    const user = session?.user;
+
     const { createTodo } = useCreateToDo(
         () => {
             refetch().then(() => {
@@ -37,7 +40,7 @@ const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
     const handleCreate = (values: ITodoCreate) => {
         values.y_position = 0;
         values.x_position = 0;
-        values.user_id = session?.user?.id;
+        values.user = user;
 
         if (!values.title || !values.description) {
             api.error({

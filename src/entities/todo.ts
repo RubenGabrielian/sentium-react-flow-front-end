@@ -16,10 +16,18 @@ export interface ITodoData {
     description: string;
     id: number;
 }
+
+interface IUser {
+    name?: string | null;
+    email?: string | null;
+    id?: string | null;
+    image? : string | null;
+}
+
 export interface ITodoCreate {
     title: string;
     description: string;
-    user_id: string;
+    user: IUser | undefined;
     y_position: number;
     x_position: number;
 }
