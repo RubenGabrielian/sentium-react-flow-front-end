@@ -42,7 +42,7 @@ export interface ITodoMutated {
     data: ITodoData;
     position: IToDoPosition;
     type: string;
-    completed: number;
+    completed?: number;
 }
 
 export interface ITodosList {
