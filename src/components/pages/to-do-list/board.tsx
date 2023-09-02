@@ -29,7 +29,7 @@ const Board = (): JSX.Element => {
 
     const [api, contextHolder] = notification.useNotification();
     const [nodes, setNodes] = useState<ITodosListMutated>([]);
-    const [edges, setEdges] = useState<Edge<any>[]>([]);
+    const [edges, setEdges] = useState<IEdges>([]);
 
     const { todos, isLoading } = useGetTodos();
     const { edgesList } = useGetEdges();
@@ -105,41 +105,42 @@ const Board = (): JSX.Element => {
 
 
     const onNodeDrag: NodeDragHandler = (event, node) => {
-    if (node?.dragging) {
-        console.log(node)
-        if (node?.data?.id) {
-            updateToDoPosition.mutate({
-                id: node.id,
-                x_position: node?.position?.x,
-                y_position: node?.position?.y,
-            });
+        if (node?.dragging) {
+            console.log(node)
+            if (node?.data?.id) {
+                updateToDoPosition.mutate({
+                    id: node.id,
+                    x_position: node?.position?.x,
+                    y_position: node?.position?.y,
+                });
+            }
         }
-    }
-};
+    };
 
 
-return (
-    <>
-        <BoardHeader setNodes={setNodes} nodes={nodes} />
-        <div className="board">
-            {contextHolder}
-            {isLoading ? <Loading /> : (
-                <ReactFlow
-                    nodes={nodes}
-                    edges={edges}
-                    onConnect={onConnect}
-                    onNodesChange={onNodeChanges}
-                    onEdgesChange={onEdgesChange}
-                    nodeTypes={nodeTypes}
-                    onNodeDragStop={onNodeDrag}
-                >
-                    <Background />
-                    <Controls />
-                </ReactFlow>
-            )}
-        </div>
-    </>
-)
+    return (
+        <>
+            <BoardHeader setNodes={setNodes} nodes={nodes} />
+            <div className="board">
+                {contextHolder}
+                {isLoading ? <Loading /> : (
+                    <ReactFlow
+                        nodes={nodes}
+                        //@ts-ignore
+                        edges={edges}
+                        onConnect={onConnect}
+                        onNodesChange={onNodeChanges}
+                        onEdgesChange={onEdgesChange}
+                        nodeTypes={nodeTypes}
+                        onNodeDragStop={onNodeDrag}
+                    >
+                        <Background />
+                        <Controls />
+                    </ReactFlow>
+                )}
+            </div>
+        </>
+    )
 }
 
 export default Board;
