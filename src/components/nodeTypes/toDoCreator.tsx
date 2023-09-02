@@ -37,7 +37,7 @@ const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
     const handleCreate = (values: ITodoCreate) => {
         values.y_position = 0;
         values.x_position = 0;
-        values.user_id = session?.user?.user?.id;
+        values.user_id = session?.user?.id;
 
         if (!values.title || !values.description) {
             api.error({

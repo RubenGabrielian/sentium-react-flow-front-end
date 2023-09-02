@@ -30,7 +30,7 @@ const Navbar = (): JSX.Element => {
               <Link href={"/to-do-list"}>To Do List</Link>
             </li>
           </ul>
-          {session?.user?.user ? (
+          {session?.user ? (
             <Dropdown
               menu={{
                 items,
@@ -38,7 +38,7 @@ const Navbar = (): JSX.Element => {
               trigger={["click"]}
             >
               <a onClick={(e) => e.preventDefault()}>
-                {session?.user?.user?.name} <DownOutlined />
+                {session?.user?.name} <DownOutlined />
               </a>
             </Dropdown>
           ) : (

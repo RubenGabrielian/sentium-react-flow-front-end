@@ -25,7 +25,6 @@ export const authOptions: NextAuthOptions = {
                 const {email, password} = credentials;
                 const user = await LoginService({email,password});
                 if (user.data) {
-                    console.log(user);
                     return user.data;
                 } else {
                     return null;
@@ -37,16 +36,14 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         jwt: async ({ token, user }) => {
             if (user?.user?.user) {
-                token.user = user?.user;
+                token.user = user?.user.user;
             } else {
                 user && (token.user = user);
             }
             return token;
         },
         async session({ session, token }) {
-            // console.log(session,'session')
-            // console.log(token,'token')
-            session.user = token?.user; // Setting token in session
+            session.user = token?.user.user; // Setting token in session
             return Promise.resolve(session);
         },
     },
