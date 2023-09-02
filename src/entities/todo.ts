@@ -65,7 +65,7 @@ export interface INode {
 }
 
 export interface ITodoPositionChange {
-    id: number,
+    id: string,
     x_position: number,
     y_position: number,
 }
