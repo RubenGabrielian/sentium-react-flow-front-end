@@ -68,7 +68,8 @@ const ToDoItem = ({ data }: IProps): JSX.Element => {
         !editable ? (
             <div className={'todo'}>
                 {contextHolder}
-                {deleteTodo?.isLoading || completedTodo?.isLoading && <Loading />}
+                {deleteTodo?.isLoading && <Loading />}
+                {completedTodo?.isLoading && <Loading />}
                 <h3>{data?.title}</h3>
                 <p>{data?.description}</p>
                 <Flex justifyContent={'space-between'}>

@@ -38,7 +38,17 @@ const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
         values.y_position = 0;
         values.x_position = 0;
         values.user_id = session?.user?.user?.id;
-        createTodo.mutate(values);
+
+        if (!values.title || !values.description) {
+            api.error({
+                message: "Error",
+                description: "Please fill all fields",
+                placement: "topRight",
+            });
+        } else {
+            createTodo.mutate(values);
+        }
+
     }
 
     return (
@@ -56,11 +66,6 @@ const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
                         <ToDoItem data={data} />
                     ) : <CreateToDoForm data={data} handleFinish={handleCreate} />
                 }
-                {/* {data?.title ? (
-                    <ToDoItem data={data} handleDeleteTodo={handleDeleteTodo} />
-                ) : (
-                    <CreateToDoForm data={data} handleFinish={handleFinish} />
-                )} */}
             </div>
             <Handle
                 type="source"

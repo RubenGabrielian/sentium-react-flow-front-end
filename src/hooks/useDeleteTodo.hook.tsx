@@ -1,11 +1,11 @@
 import { todosApi } from "@/services/todos";
-import { AxiosResponse } from "axios";
+import { Axios, AxiosResponse } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
 export const useDeleteToDo = (
     onSuccess = (data: AxiosResponse) => {
     },
-    onError = (e) => {
+    onError = (e: AxiosResponse) => {
     },
 ) => {
     const client = useQueryClient();
@@ -13,7 +13,7 @@ export const useDeleteToDo = (
         onSuccess: (data) => {
             onSuccess(data);
         },
-        onError: (e) => {
+        onError: (e: AxiosResponse) => {
             onError(e);
         },
     });
