@@ -1,8 +1,15 @@
 "use client";
-import { useSession } from "next-auth/react";
+import Container from "@/components/molecules/container/container";
+import Board from "@/components/pages/to-do-list/board";
+import React from "react";
 
-export default function ToDoList() {
-  const { data: session } = useSession();
 
-  return <div>To Do List</div>;
+const ToDoList = () : JSX.Element => {
+  return (
+    <Container>
+      <Board />
+    </Container>
+  )
 }
+
+export default ToDoList;
