@@ -14,6 +14,7 @@ import { useUpdateToDoPosition } from "@/hooks/useUpdateToDoPosition.hook";
 import { notification } from "antd";
 import { useCreateEdge } from "@/hooks/useCreateEdge.hook";
 import BoardHeader from "./header";
+import Loading from "@/components/molecules/loading/loading";
 
 
 
@@ -26,7 +27,7 @@ const Board = (): JSX.Element => {
     const [nodes, setNodes] = useState<ITodosListMutated>([]);
     const [edges, setEdges] = useState<IEdges>(initialEdges);
 
-    const { todos } = useGetTodos();
+    const { todos, isLoading } = useGetTodos();
     const { edgesList } = useGetEdges();
 
     const { updateToDoPosition } = useUpdateToDoPosition(
@@ -98,18 +99,20 @@ const Board = (): JSX.Element => {
             <BoardHeader setNodes={setNodes} nodes={nodes} />
             <div className="board">
                 {contextHolder}
-                <ReactFlow
-                    nodes={nodes}
-                    edges={edges}
-                    onConnect={onConnect}
-                    onNodesChange={onNodeChanges}
-                    onEdgesChange={onEdgesChange}
-                    nodeTypes={nodeTypes}
-                    onNodeDragStop={onNodeDrag}
-                >
-                    <Background />
-                    <Controls />
-                </ReactFlow>
+                {isLoading ? <Loading /> : (
+                    <ReactFlow
+                        nodes={nodes}
+                        edges={edges}
+                        onConnect={onConnect}
+                        onNodesChange={onNodeChanges}
+                        onEdgesChange={onEdgesChange}
+                        nodeTypes={nodeTypes}
+                        onNodeDragStop={onNodeDrag}
+                    >
+                        <Background />
+                        <Controls />
+                    </ReactFlow>
+                )}
             </div>
         </>
     )

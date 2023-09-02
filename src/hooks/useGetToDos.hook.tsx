@@ -10,7 +10,7 @@ export default function useGetTodos() {
 
     const userId = session?.user?.user?.id;
 
-    const { data: todos, refetch } = useQuery(["todos", userId], () => todosApi.fetchTodos(userId), {
+    const { data: todos, refetch, isLoading } = useQuery(["todos", userId], () => todosApi.fetchTodos(userId), {
         staleTime: Infinity,
         enabled: !!userId,
         select: ({ data }) => {
@@ -22,9 +22,9 @@ export default function useGetTodos() {
                 completed: item?.completed,
             }));
             return {
-                data: newData,
+                data: newData
             };
         },
     });
-    return { todos, refetch };
+    return { todos, refetch, isLoading };
 }

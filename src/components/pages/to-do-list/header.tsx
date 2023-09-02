@@ -24,7 +24,7 @@ const BoardHeader = ({ setNodes, nodes }: IProps): JSX.Element => {
     };
 
     return (
-        <Flex justifyContent="space-between" className="board-header">
+        <Flex justifyContent="space-between" className="board-header" alignItems="center">
             <h2>Enjoy your board</h2>
             <Button type="primary" onClick={handleCreateToDo}>Add New <PlusOutlined /></Button>
         </Flex>
