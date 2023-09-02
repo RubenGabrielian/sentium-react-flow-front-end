@@ -19,6 +19,7 @@ const $axios: AxiosInstance = axios.create(axiosConfig);
 $axios.interceptors.request.use(async (config) => {
     const session = await getSession();
     if (session) {
+        //@ts-ignore
         config.headers.Authorization = `Bearer ${session?.user?.token}`;
     }
     return config;
