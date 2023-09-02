@@ -8,12 +8,13 @@ export default function useGetTodos() {
 
     const { data: session } = useSession();
 
-    const user = session?.user;
+    //@ts-ignore
+    const userId = session?.user?.id;
 
     //@ts-ignore
-    const { data: todos, refetch, isLoading } = useQuery(["todos", user], () => todosApi.fetchTodos(session?.user), {
+    const { data: todos, refetch, isLoading } = useQuery(["todos", userId], () => todosApi.fetchTodos(userId), {
         staleTime: Infinity,
-        enabled: !!user,
+        enabled: !!userId,
         select: ({ data }) => {
             const newData = data?.map((item: ITodo) => ({
                 id: item?.id.toString(),

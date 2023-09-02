@@ -8,8 +8,8 @@ export const todosApi = {
     async createTodo(data: ITodoCreate) {
         return await $axios.post<AxiosResponse>("/api/create-todo", data);
     },
-    async fetchTodos(user: User) {
-        const response = await $axios.get<ITodosList>(`/api/todos?id=${user?.id}`);
+    async fetchTodos(userId: User) {
+        const response = await $axios.get<ITodosList>(`/api/todos?id=${userId}`);
         return response.data;
     },
     async updateTodoPosition(data: ITodoPositionChange) {
