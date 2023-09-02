@@ -25,10 +25,9 @@ import Loading from "@/components/molecules/loading/loading";
 const Board = (): JSX.Element => {
 
 
-    const initialEdges: IEdges = [];
     const [api, contextHolder] = notification.useNotification();
     const [nodes, setNodes] = useState<ITodosListMutated>([]);
-    const [edges, setEdges] = useState<IEdges>(initialEdges);
+    const [edges, setEdges] = useState<IEdges>([]);
 
     const { todos, isLoading } = useGetTodos();
     const { edgesList } = useGetEdges();
@@ -81,7 +80,10 @@ const Board = (): JSX.Element => {
     // }, []);
 
     const onEdgesChange: OnEdgesChange = useCallback(
-        (changes) => setEdges((eds): any => applyEdgeChanges(changes, eds)),
+        (changes) => {
+            //@ts-ignore
+            setEdges((eds): any => applyEdgeChanges(changes, eds))
+        },
         [setEdges]
     );
 
@@ -93,6 +95,7 @@ const Board = (): JSX.Element => {
     const onConnect: OnConnect = useCallback(
         (params: any) => {
             createEdge.mutate(params)
+            //@ts-ignore
             setEdges((eds): any => addEdge(params, eds))
         },
         [createEdge, setEdges]
