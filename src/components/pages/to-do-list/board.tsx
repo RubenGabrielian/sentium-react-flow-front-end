@@ -64,16 +64,17 @@ const Board = (): JSX.Element => {
         edgesList && setEdges(edgesList);
     }, [todos, edgesList]);
 
-
+    // @ts-ignore
     const onNodeChanges = useCallback(changes => {
         setNodes(nds => applyNodeChanges(changes, nds));
     }, []);
 
+    // @ts-ignore
     const onEdgesChange = useCallback(changes => {
         setEdges(eds => applyEdgeChanges(changes, eds));
     }, []);
 
-
+    // @ts-ignore
     const onConnect = useCallback((params: IEdge) => {
         createEdge.mutate(params);
         setEdges((eds) => addEdge(params, eds))
