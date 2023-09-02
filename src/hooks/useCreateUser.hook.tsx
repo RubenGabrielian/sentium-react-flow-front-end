@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "react-query";
 import { RegisterService } from "@/services/user";
 import { IRegistration, IUser } from "@/entities/user";
+import { AxiosInstance } from "axios";
 
 export const useCreateUser = (
-  onSuccess = (data: IUser) => {},
-  onError = (e) => {}
+  onSuccess = (data: IUser) => { },
+  onError = (e: AxiosInstance) => { }
 ) => {
   const client = useQueryClient();
 
@@ -12,11 +13,11 @@ export const useCreateUser = (
     onSuccess: (data) => {
       onSuccess(data);
     },
-    onError: (e) => {
+    onError: (e: AxiosInstance) => {
       onError(e);
     },
   });
 
-  
+
   return { useRegisterUser };
 };

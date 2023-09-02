@@ -1,11 +1,11 @@
 import { todosApi } from "@/services/todos";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
 export const useUpdateToDoPosition = (
     onSuccess = (data: AxiosResponse) => {
     },
-    onError = (e: AxiosError) => {
+    onError = (e: AxiosResponse) => {
     },
 ) => {
     const client = useQueryClient();
@@ -13,7 +13,7 @@ export const useUpdateToDoPosition = (
         onSuccess: (data) => {
             onSuccess(data);
         },
-        onError: (e) => {
+        onError: (e: AxiosResponse) => {
             onError(e);
         },
         onMutate: () => {
