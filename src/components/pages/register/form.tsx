@@ -26,7 +26,7 @@ const RegisterForm = (): JSX.Element => {
     (e) => {
       api.error({
         message: `Error`,
-        description: e.response?.data?.message,
+        description: "Someting went wrong",
         placement: "topRight",
       });
     }
