@@ -1,4 +1,3 @@
-"use client";
 import "./globals.css";
 import "../scss/app.scss";
 import type { Metadata } from "next";
