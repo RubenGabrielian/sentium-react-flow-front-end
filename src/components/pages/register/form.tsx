@@ -1,6 +1,5 @@
 "use client";
 import { Button, Form, Input, notification } from "antd";
-import { StyledAuthForm } from "@/components/pages/login/loginForm.styled";
 import { useCreateUser } from "@/hooks/useCreateUser.hook";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
