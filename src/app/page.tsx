@@ -1,11 +1,9 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import React from "react";
 
-export default async function Home() {
-
-  return (
-    <main>
-      <h1>Welcom to my Test Task</h1>
-    </main>
-  );
+const Home = (): JSX.Element => {
+    return (
+        <main>
+            <h1>Welcome to my Test Task</h1>
+        </main>
+    );
 }

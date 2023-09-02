@@ -1,7 +1,7 @@
 export interface IIdentity {
     email: string;
-    name: string;
-} 
+    name?: string;
+}
 
 export interface IUser extends IIdentity {
     id: number;
@@ -10,3 +10,5 @@ export interface IUser extends IIdentity {
 export interface IRegistration extends IIdentity {
     password: string;
 }
+
+

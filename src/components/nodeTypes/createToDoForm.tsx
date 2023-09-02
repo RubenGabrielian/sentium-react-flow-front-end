@@ -1,25 +1,24 @@
 import React from 'react';
-import { Button, Form, Input } from 'antd';
-import { ITodo, ITodoCreate } from '@/entities/todo';
+import {Button, Form, Input} from 'antd';
+import {ITodo, ITodoCreate} from '@/entities/todo';
 
-const { TextArea } = Input;
-
+const {TextArea} = Input;
 
 interface IProps {
     data: ITodo,
     handleFinish: (values: ITodoCreate) => void
 }
 
-const CreateToDoForm = ({ data, handleFinish }: IProps): JSX.Element => {
+const CreateToDoForm = ({data, handleFinish}: IProps): JSX.Element => {
     return (
         <Form
             layout={'vertical'}
             onFinish={handleFinish}>
             <Form.Item label={'Title'} name={'title'}>
-                <Input />
+                <Input/>
             </Form.Item>
             <Form.Item label={'Description'} name={'description'}>
-                <TextArea />
+                <TextArea/>
             </Form.Item>
             <Form.Item>
                 <Button type={'primary'} htmlType={'submit'} block>

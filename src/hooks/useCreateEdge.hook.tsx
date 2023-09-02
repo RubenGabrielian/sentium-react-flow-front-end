@@ -1,11 +1,13 @@
-import { IEdge } from "@/entities/edges";
-import { edgesApi } from "@/services/edges";
-import { AxiosResponse } from "axios";
-import { useMutation, useQueryClient } from "react-query";
+import {IEdge} from "@/entities/edges";
+import {edgesApi} from "@/services/edges";
+import {AxiosResponse} from "axios";
+import {useMutation, useQueryClient} from "react-query";
 
 export const useCreateEdge = (
-    onSuccess = (data: IEdge) => { },
-    onError = (e: AxiosResponse) => { },
+    onSuccess = (data: IEdge) => {
+    },
+    onError = (e: AxiosResponse) => {
+    },
 ) => {
     const client = useQueryClient();
     const createEdge = useMutation(edgesApi.createEdge, {
@@ -17,5 +19,5 @@ export const useCreateEdge = (
         },
     });
 
-    return { createEdge }
+    return {createEdge}
 };

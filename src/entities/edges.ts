@@ -9,6 +9,7 @@ export interface IEdge {
 }
 
 export type IEdges = IEdge[];
+
 export interface IEdgesListData {
     data: IEdge[];
 }

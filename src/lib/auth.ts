@@ -1,7 +1,6 @@
 import type {NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {LoginService} from "@/services/user";
-import {session} from "next-auth/core/routes";
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -23,9 +22,9 @@ export const authOptions: NextAuthOptions = {
             },
             async authorize(credentials) {
                 const {email, password} = credentials;
-                const user = await LoginService({email,password});
+                const user = await LoginService({email, password});
                 if (user.data) {
-                    return user.data;
+                    return user.data as any;
                 } else {
                     return null;
                 }
@@ -34,7 +33,7 @@ export const authOptions: NextAuthOptions = {
     ],
 
     callbacks: {
-        jwt: async ({ token, user }) => {
+        jwt: async ({token, user}) => {
             if (user?.user?.user) {
                 token.user = user?.user.user;
             } else {
@@ -42,7 +41,7 @@ export const authOptions: NextAuthOptions = {
             }
             return token;
         },
-        async session({ session, token }) {
+        async session({session, token}) {
             session.user = token?.user.user; // Setting token in session
             return Promise.resolve(session);
         },

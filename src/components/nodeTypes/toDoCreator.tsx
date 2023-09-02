@@ -1,12 +1,12 @@
 import React from "react";
-import { Handle, Position } from "reactflow";
+import {Handle, Position} from "reactflow";
 import ToDoItem from "./toDoItem";
-import { ITodo, ITodoCreate } from "@/entities/todo";
+import {ITodo, ITodoCreate} from "@/entities/todo";
 import CreateToDoForm from "./createToDoForm";
-import { useSession } from "next-auth/react";
-import { useCreateToDo } from "@/hooks/useCreateTodo.hook";
+import {useSession} from "next-auth/react";
+import {useCreateToDo} from "@/hooks/useCreateTodo.hook";
 import Loading from "../molecules/loading/loading";
-import { notification } from "antd";
+import {notification} from "antd";
 import useGetTodos from "@/hooks/useGetToDos.hook";
 
 interface IProps {
@@ -14,14 +14,14 @@ interface IProps {
     isConnectable: boolean;
 }
 
-const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
+const ToDoCreator = ({data, isConnectable}: IProps): JSX.Element => {
     const [api, contextHolder] = notification.useNotification();
-    const { refetch } = useGetTodos();
-    const { data: session } = useSession();
-    
+    const {refetch} = useGetTodos();
+    const {data: session} = useSession();
+
     const user = session?.user;
 
-    const { createTodo } = useCreateToDo(
+    const {createTodo} = useCreateToDo(
         () => {
             refetch().then(() => {
                 api.success({
@@ -57,7 +57,7 @@ const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
     return (
         <div className="to-do-creator">
             {contextHolder}
-            {createTodo?.isLoading && <Loading />}
+            {createTodo?.isLoading && <Loading/>}
             <Handle
                 type="target"
                 position={Position.Top}
@@ -66,8 +66,8 @@ const ToDoCreator = ({ data, isConnectable }: IProps): JSX.Element => {
             <div className={'create-to-do-wrapper'}>
                 {
                     data?.title ? (
-                        <ToDoItem data={data} />
-                    ) : <CreateToDoForm data={data} handleFinish={handleCreate} />
+                        <ToDoItem data={data}/>
+                    ) : <CreateToDoForm data={data} handleFinish={handleCreate}/>
                 }
             </div>
             <Handle

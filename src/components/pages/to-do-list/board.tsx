@@ -1,40 +1,36 @@
-import { IEdge, IEdges, IEdgesListData } from "@/entities/edges";
-import { INode, ITodosListMutated } from "@/entities/todo";
+import {IEdges} from "@/entities/edges";
+import {ITodosListMutated} from "@/entities/todo";
 import useGetTodos from "@/hooks/useGetToDos.hook";
-import React, { useCallback, useEffect, useState } from "react";
-import { QueryClient, dehydrate } from "react-query";
+import React, {useCallback, useEffect, useState} from "react";
 import ReactFlow, {
-    Controls, Background, addEdge, applyEdgeChanges,
+    addEdge,
+    applyEdgeChanges,
     applyNodeChanges,
-    OnNodesChange,
-    OnEdgesChange,
-    OnConnect,
-    Edge,
+    Background,
+    Controls,
     NodeDragHandler,
+    OnConnect,
+    OnEdgesChange,
+    OnNodesChange,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { nodeTypes } from "./nodeTypes";
+import {nodeTypes} from "./nodeTypes";
 import useGetEdges from "@/hooks/useGetEdges.hook";
-import { useUpdateToDoPosition } from "@/hooks/useUpdateToDoPosition.hook";
-import { notification } from "antd";
-import { useCreateEdge } from "@/hooks/useCreateEdge.hook";
+import {useUpdateToDoPosition} from "@/hooks/useUpdateToDoPosition.hook";
+import {notification} from "antd";
+import {useCreateEdge} from "@/hooks/useCreateEdge.hook";
 import BoardHeader from "./header";
 import Loading from "@/components/molecules/loading/loading";
 
 
-
-
 const Board = (): JSX.Element => {
-
-
     const [api, contextHolder] = notification.useNotification();
     const [nodes, setNodes] = useState<ITodosListMutated>([]);
     const [edges, setEdges] = useState<IEdges>([]);
+    const {todos, isLoading} = useGetTodos();
+    const {edgesList} = useGetEdges();
 
-    const { todos, isLoading } = useGetTodos();
-    const { edgesList } = useGetEdges();
-
-    const { updateToDoPosition } = useUpdateToDoPosition(
+    const {updateToDoPosition} = useUpdateToDoPosition(
         () => {
             api.success({
                 message: "Success",
@@ -48,7 +44,7 @@ const Board = (): JSX.Element => {
             });
         });
 
-    const { createEdge } = useCreateEdge(
+    const {createEdge} = useCreateEdge(
         () => {
             api.success({
                 message: "Success",
@@ -68,18 +64,10 @@ const Board = (): JSX.Element => {
         edgesList && setEdges(edgesList);
     }, [todos, edgesList]);
 
-    // const onNodeChanges = useCallback(changes => {
-    //     setNodes(nds => applyNodeChanges(changes, nds));
-    // }, []);
-
     const onNodeChanges: OnNodesChange = useCallback(
         (changes) => setNodes((nds): any => applyNodeChanges(changes, nds)),
         [setNodes]
     );
-
-    // const onEdgesChange = useCallback(changes => {
-    //     setEdges(eds => applyEdgeChanges(changes, eds));
-    // }, []);
 
     const onEdgesChange: OnEdgesChange = useCallback(
         (changes) => {
@@ -89,10 +77,6 @@ const Board = (): JSX.Element => {
         [setEdges]
     );
 
-    // const onConnect = useCallback((params: IEdge) => {
-    //     createEdge.mutate(params);
-    //     setEdges((eds) => addEdge(params, eds))
-    // }, []);
 
     const onConnect: OnConnect = useCallback(
         (params: any) => {
@@ -102,7 +86,6 @@ const Board = (): JSX.Element => {
         },
         [createEdge, setEdges]
     );
-
 
     const onNodeDrag: NodeDragHandler = (event, node) => {
         if (node?.dragging) {
@@ -117,13 +100,12 @@ const Board = (): JSX.Element => {
         }
     };
 
-
     return (
         <>
-            <BoardHeader setNodes={setNodes} nodes={nodes} />
+            <BoardHeader setNodes={setNodes} nodes={nodes}/>
             <div className="board">
                 {contextHolder}
-                {isLoading ? <Loading /> : (
+                {isLoading ? <Loading/> : (
                     <ReactFlow
                         nodes={nodes}
                         //@ts-ignore
@@ -134,8 +116,8 @@ const Board = (): JSX.Element => {
                         nodeTypes={nodeTypes}
                         onNodeDragStop={onNodeDrag}
                     >
-                        <Background />
-                        <Controls />
+                        <Background/>
+                        <Controls/>
                     </ReactFlow>
                 )}
             </div>

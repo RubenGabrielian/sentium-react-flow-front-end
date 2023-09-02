@@ -1,6 +1,6 @@
-import { todosApi } from "@/services/todos";
-import { AxiosError, AxiosResponse } from "axios";
-import { useMutation, useQueryClient } from "react-query";
+import {todosApi} from "@/services/todos";
+import {AxiosError, AxiosResponse} from "axios";
+import {useMutation, useQueryClient} from "react-query";
 
 export const useUpdateToDoContent = (
     onSuccess = (data: AxiosResponse) => {
@@ -17,5 +17,5 @@ export const useUpdateToDoContent = (
             onError(e);
         },
     });
-    return { updateToDoContent }
+    return {updateToDoContent}
 };

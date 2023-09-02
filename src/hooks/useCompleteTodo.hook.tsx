@@ -1,6 +1,6 @@
-import { todosApi } from "@/services/todos";
-import { AxiosError, AxiosResponse } from "axios";
-import { useMutation, useQueryClient } from "react-query";
+import {todosApi} from "@/services/todos";
+import {AxiosResponse} from "axios";
+import {useMutation, useQueryClient} from "react-query";
 
 export const useCompleteToDo = (
     onSuccess = (data: AxiosResponse) => {
@@ -17,5 +17,5 @@ export const useCompleteToDo = (
             onError(e);
         },
     });
-    return { completedTodo }
+    return {completedTodo}
 };

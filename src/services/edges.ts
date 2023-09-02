@@ -1,4 +1,4 @@
-import { IEdge, IEdgesListData } from "@/entities/edges";
+import {IEdge, IEdgesListData} from "@/entities/edges";
 import $axios from "../lib/AxiosInstance";
 
 export const edgesApi = {
@@ -11,4 +11,5 @@ export const edgesApi = {
         return response?.data?.data;
     },
 };
+
 

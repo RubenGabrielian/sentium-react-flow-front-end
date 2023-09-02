@@ -1,8 +1,7 @@
-import { IUser } from './../entities/user';
-import { ITodo, ITodoCreate, ITodoId, ITodoPositionChange, ITodosList } from "@/entities/todo";
+import {ITodo, ITodoCreate, ITodoId, ITodoPositionChange, ITodosList} from "@/entities/todo";
 import $axios from "../lib/AxiosInstance";
-import { AxiosResponse } from "axios";
-import { User } from 'next-auth';
+import {AxiosResponse} from "axios";
+import {User} from 'next-auth';
 
 export const todosApi = {
     async createTodo(data: ITodoCreate) {

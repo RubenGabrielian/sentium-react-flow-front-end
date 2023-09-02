@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { getSession } from "next-auth/react";
+import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
+import {getSession} from "next-auth/react";
 
 export const headers = {
     "Content-Type": "application/json",
@@ -14,7 +14,6 @@ const axiosConfig: AxiosRequestConfig = {
 }
 
 const $axios: AxiosInstance = axios.create(axiosConfig);
-
 
 $axios.interceptors.request.use(async (config) => {
     const session = await getSession();
