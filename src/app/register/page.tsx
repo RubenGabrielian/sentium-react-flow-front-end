@@ -1,8 +1,10 @@
 "use client";
+import React from "react";
 import { Col, Row } from "antd";
 import RegisterForm from "@/components/pages/register/form";
 
-export default function Register() {
+
+const Register = () : JSX.Element => {
   return (
     <Row justify={"center"}>
       <Col lg={10}>
@@ -11,3 +13,5 @@ export default function Register() {
     </Row>
   );
 }
+
+export default Register;

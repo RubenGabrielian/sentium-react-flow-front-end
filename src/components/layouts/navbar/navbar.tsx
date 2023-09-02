@@ -1,14 +1,14 @@
-import { StyledNavbar } from "../../../components/layouts/navbar/navbar.styled";
+import React from "react";
 import Link from "next/link";
 import Container from "../../../components/molecules/container/container";
 import Flex from "../../molecules/flex/flex";
 import type { MenuProps } from "antd";
 import { Button, Dropdown } from "antd";
-import React from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { signOut, useSession } from "next-auth/react";
 
-export default function Navbar() {
+
+const Navbar = (): JSX.Element => {
   const { data: session } = useSession();
 
   const items: MenuProps["items"] = [
@@ -19,7 +19,7 @@ export default function Navbar() {
   ];
 
   return (
-    <StyledNavbar>
+    <nav>
       <Container>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <ul>
@@ -53,6 +53,8 @@ export default function Navbar() {
           )}
         </Flex>
       </Container>
-    </StyledNavbar>
+    </nav>
   );
 }
+
+export default Navbar;

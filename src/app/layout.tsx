@@ -1,11 +1,11 @@
 "use client";
 import "./globals.css";
+import "../scss/app.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NextAuthProvider } from "@/app/providers";
 import Navbar from "@/components/layouts/navbar/navbar";
 import { QueryClient, QueryClientProvider } from "react-query";
-import StyledComponentsRegistry from "../lib/registry";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,11 +28,9 @@ export default function RootLayout({
           <NextAuthProvider>
             <>
               <Navbar />
-              <StyledComponentsRegistry>
-                <QueryClientProvider client={queryClient}>
-                  {children}
-                </QueryClientProvider>
-              </StyledComponentsRegistry>
+              <QueryClientProvider client={queryClient}>
+                {children}
+              </QueryClientProvider>
             </>
           </NextAuthProvider>
         </div>

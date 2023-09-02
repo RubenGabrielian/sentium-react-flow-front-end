@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { getSession } from "next-auth/react";
 
 export const headers = {
@@ -7,12 +7,14 @@ export const headers = {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
 };
 
-const $axios = axios.create({
+const axiosConfig: AxiosRequestConfig = {
     withCredentials: true,
-    credentials: true,
     baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
-    headers: headers,
-});
+    headers,
+}
+
+const $axios: AxiosInstance = axios.create(axiosConfig);
+
 
 $axios.interceptors.request.use(async (config) => {
     const session = await getSession();

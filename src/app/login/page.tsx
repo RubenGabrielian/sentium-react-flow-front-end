@@ -1,8 +1,9 @@
 "use client";
+import React from "react";
 import { Col, Row } from "antd";
 import LoginForm from "@/components/pages/login/form";
 
-export default function Login() {
+const Login = () : JSX.Element => {
   return (
     <Row justify={"center"}>
       <Col lg={10}>
@@ -11,3 +12,6 @@ export default function Login() {
     </Row>
   );
 }
+
+export default Login;
+

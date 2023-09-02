@@ -1,18 +1,20 @@
-import { StyledAuthForm } from "@/components/pages/login/loginForm.styled";
+import { IRegistration } from "@/entities/user";
 import { Button, Form, Input, notification } from "antd";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function LoginForm() {
+
+const LoginForm = (): JSX.Element => {
   const router = useRouter();
   const [api, contextHolder] = notification.useNotification();
 
-  const handleLogin = async (values) => {
+  const handleLogin = async (values: IRegistration) => {
     await signIn("credentials", {
       email: values?.email,
       password: values?.password,
       redirect: false,
     }).then((response) => {
+      console.log(response);
       if (response?.error) {
         api.error({
           message: `Error`,
@@ -22,11 +24,17 @@ export default function LoginForm() {
       } else {
         router.push("/to-do-list");
       }
-    });
+    }).catch(() => {
+      api.error({
+        message: `Error`,
+        description: "Something went wrong",
+        placement: "topRight",
+      });
+    })
   };
 
   return (
-    <StyledAuthForm>
+    <div className="auth-form">
       {contextHolder}
       <h3>Log in to your account</h3>
       <Form layout={"vertical"} onFinish={handleLogin}>
@@ -42,6 +50,33 @@ export default function LoginForm() {
           </Button>
         </Form.Item>
       </Form>
-    </StyledAuthForm>
+    </div>
   );
 }
+
+export default LoginForm;
+
+// export default function LoginForm() {
+//   const router = useRouter();
+//   const [api, contextHolder] = notification.useNotification();
+
+//   const handleLogin = async (values) => {
+//     await signIn("credentials", {
+//       email: values?.email,
+//       password: values?.password,
+//       redirect: false,
+//     }).then((response) => {
+//       if (response?.error) {
+//         api.error({
+//           message: `Error`,
+//           description: "Something went wrong",
+//           placement: "topRight",
+//         });
+//       } else {
+//         router.push("/to-do-list");
+//       }
+//     });
+//   };
+
+
+// }

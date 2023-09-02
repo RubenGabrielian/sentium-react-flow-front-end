@@ -5,17 +5,20 @@ import { useCreateUser } from "@/hooks/useCreateUser.hook";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { IRegistration } from "@/entities/user";
 
-export default function RegisterForm() {
+const RegisterForm = (): JSX.Element => {
+
   const router = useRouter();
   const [api, contextHolder] = notification.useNotification();
-  const [values, setValues] = useState();
+  const [registerForm, setRegisterForm] = useState<IRegistration>();
 
   const { useRegisterUser } = useCreateUser(
     (data) => {
+      console.log(data);
       signIn("credentials", {
-        email: values.email,
-        password: values.password,
+        email: registerForm?.email,
+        password: registerForm?.password,
         redirect: false,
       }).then(() => {
         router.push("/to-do-list");
@@ -30,13 +33,13 @@ export default function RegisterForm() {
     }
   );
 
-  const handleRegister = (values) => {
-    setValues(values);
+  const handleRegister = (values: IRegistration) => {
+    setRegisterForm(values);
     useRegisterUser.mutate(values);
   };
 
   return (
-    <StyledAuthForm>
+    <div className="auth-form">
       {contextHolder}
       <h3>Register your account</h3>
       <Form layout={"vertical"} onFinish={handleRegister}>
@@ -55,6 +58,9 @@ export default function RegisterForm() {
           </Button>
         </Form.Item>
       </Form>
-    </StyledAuthForm>
+    </div>
   );
+
 }
+
+export default RegisterForm;
