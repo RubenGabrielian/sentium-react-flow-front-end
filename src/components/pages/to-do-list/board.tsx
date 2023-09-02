@@ -6,6 +6,9 @@ import { QueryClient, dehydrate } from "react-query";
 import ReactFlow, {
     Controls, Background, addEdge, applyEdgeChanges,
     applyNodeChanges,
+    OnNodesChange,
+    OnEdgesChange,
+    OnConnect,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { nodeTypes } from "./nodeTypes";
@@ -64,21 +67,36 @@ const Board = (): JSX.Element => {
         edgesList && setEdges(edgesList);
     }, [todos, edgesList]);
 
-    //@ts-ignore
-    const onNodeChanges = useCallback(changes => {
-        setNodes(nds => applyNodeChanges(changes, nds));
-    }, []);
+    // const onNodeChanges = useCallback(changes => {
+    //     setNodes(nds => applyNodeChanges(changes, nds));
+    // }, []);
 
-    //@ts-ignore
-    const onEdgesChange = useCallback(changes => {
-        setEdges(eds => applyEdgeChanges(changes, eds));
-    }, []);
+    const onNodeChanges: OnNodesChange = useCallback(
+        (changes) => setNodes((nds): any => applyNodeChanges(changes, nds)),
+        [setNodes]
+    );
 
-    //@ts-ignore
-    const onConnect = useCallback((params: IEdge) => {
-        createEdge.mutate(params);
-        setEdges((eds) => addEdge(params, eds))
-    }, []);
+    // const onEdgesChange = useCallback(changes => {
+    //     setEdges(eds => applyEdgeChanges(changes, eds));
+    // }, []);
+
+    const onEdgesChange: OnEdgesChange = useCallback(
+        (changes) => setEdges((eds): any => applyEdgeChanges(changes, eds)),
+        [setEdges]
+    );
+
+    // const onConnect = useCallback((params: IEdge) => {
+    //     createEdge.mutate(params);
+    //     setEdges((eds) => addEdge(params, eds))
+    // }, []);
+
+    const onConnect: OnConnect = useCallback(
+        (params: any) => {
+            createEdge.mutate(params)
+            setEdges((eds): any => addEdge(params, eds))
+        },
+        [createEdge, setEdges]
+    );
 
 
     const onNodeDrag = (event: Event, node: INode) => {
