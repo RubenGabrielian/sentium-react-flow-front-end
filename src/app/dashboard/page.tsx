@@ -3,8 +3,8 @@ import React from "react";
 import Container from "@/components/molecules/container/container";
 import {Col, Row} from "antd";
 import NuclearChart from "@/components/pages/dashboard/nuclearChart";
-import ExchangeChart from "@/components/pages/dashboard/exchangeChart";
-import TemperatureChart from "@/components/pages/dashboard/temperatureChart";
+import SimpleChart from "@/components/pages/dashboard/simpleChart";
+import SalesChart from "@/components/pages/dashboard/salesChart";
 
 const Dashboard = (): JSX.Element => {
     return (
@@ -14,10 +14,10 @@ const Dashboard = (): JSX.Element => {
                     <NuclearChart/>
                 </Col>
                 <Col lg={12} md={24} xs={24}>
-                    <ExchangeChart/>
+                    <SimpleChart/>
                 </Col>
                 <Col lg={24} md={24} xs={24}>
-                    <TemperatureChart/>
+                    <SalesChart/>
                 </Col>
             </Row>
         </Container>
