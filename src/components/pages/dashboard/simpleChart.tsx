@@ -15,7 +15,7 @@ const options: Highcharts.Options = {
 };
 
 
-const SimpleChart = (props: HighchartsReact.Props) => {
+const SimpleChart = (props: HighchartsReact.Props): JSX.Element => {
 
     const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 

@@ -42,7 +42,7 @@ const options: Highcharts.Options = {
         data: [47, 83.33, 70.66, 239.33, 175.66],
         marker: {
             lineWidth: 2,
-            lineColor: Highcharts.getOptions().colors[3],
+            lineColor: "red",
             fillColor: 'white'
         }
     }, {
@@ -51,7 +51,7 @@ const options: Highcharts.Options = {
         data: [{
             name: '2020',
             y: 619,
-            color: Highcharts.getOptions().colors[0], // 2020 color
+            color: "green", // 2020 color
             dataLabels: {
                 enabled: true,
                 distance: -50,
@@ -63,11 +63,11 @@ const options: Highcharts.Options = {
         }, {
             name: '2021',
             y: 586,
-            color: Highcharts.getOptions().colors[1] // 2021 color
+            color: "blue" // 2021 color
         }, {
             name: '2022',
             y: 647,
-            color: Highcharts.getOptions().colors[2] // 2022 color
+            color: "yellow" // 2022 color
         }],
         center: [75, 65],
         size: 100,

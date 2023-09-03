@@ -22,6 +22,7 @@
     "next": "13.4.10",
     "next-auth": "0.0.0-pr.6777.c5550344",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-query": "3.39.3",
     "react-uuid": "^2.0.0",
