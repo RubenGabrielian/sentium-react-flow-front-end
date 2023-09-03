@@ -74,7 +74,7 @@ const options: Highcharts.Options = {
 };
 
 
-const NuclearChart = (props: HighchartsReact.Props): JSX.Element => {
+const NuclearChart = (props: HighchartsReact.Props) => {
 
     const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 

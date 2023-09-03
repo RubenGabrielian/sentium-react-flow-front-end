@@ -80,7 +80,7 @@ const options: Highcharts.Options = {
 };
 
 
-const SalesChart = (props: HighchartsReact.Props): JSX.Element => {
+const SalesChart = (props: HighchartsReact.Props) => {
 
     const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
